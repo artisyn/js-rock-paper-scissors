@@ -12,17 +12,29 @@
 }
 :root {
 	--main-white: rgb(121, 121, 121);
-	--secondary-white: #e5e7eb;
 	--main-red: rgb(89, 6, 6);
 	--main-red-lighter: rgb(146, 21, 21);
-	--main-grey: #6e747c;
-	--header-background: #1f2937;
-	--main-blue: #3882f6;
 	--main-green: #596b4b;
 	--main-btn: #5c767b;
 	--hover-btn: #425559;
 	--border-btn: #a09d8a;
 	--decoration: #4c5044;
+	--card-mainside: linear-gradient(
+		to bottom,
+		#44454a,
+		#3d3e43,
+		#35373d,
+		#2e3036,
+		#272930
+	);
+	--card-backside: linear-gradient(
+		to right bottom,
+		#7e340f,
+		#8d3b11,
+		#9d4312,
+		#ac4a14,
+		#bc5215
+	);
 }
 body {
 	min-height: 100vh;
@@ -34,6 +46,9 @@ body {
 	padding: 2rem;
 	color: white;
 	font-family: 'Yatra One', cursive;
+}
+.game-title {
+	transition: opacity ease 2s;
 }
 
 .main {
@@ -60,6 +75,7 @@ body {
 	font-size: 1.3rem;
 	padding: 0.5rem 1rem;
 	width: 60vw;
+	max-width: 1100px;
 }
 
 .button-container {
@@ -227,8 +243,10 @@ body {
 	width: 10rem;
 	height: 15rem;
 	background-color: #272930;
+	background: var(--card-mainside);
 	border-radius: 1rem;
 	border: 3px solid var(--border-btn);
+	pointer-events: none;
 }
 .card-paper {
 	border-radius: 50%;
@@ -285,11 +303,19 @@ body {
 /* Player cards styles */
 
 .player-selected {
+	position: relative;
 	width: 10rem;
 	height: 15rem;
 	position: absolute;
 	right: 10%;
 	top: 25%;
+}
+.player-selected::after {
+	content: 'Your Selected Card';
+	position: absolute;
+	width: 100%;
+	bottom: -1.6rem;
+	text-align: center;
 }
 
 .player-cards {
@@ -302,6 +328,7 @@ body {
 	justify-content: center;
 }
 .card1 {
+	cursor: pointer;
 	transform: rotate(-15deg);
 	transition: all ease 0.4s;
 	border-radius: 1rem;
@@ -312,6 +339,8 @@ body {
 	box-shadow: 1px 3px 30px 3px #d3c081;
 }
 .card2 {
+	cursor: pointer;
+
 	transform: translateY(-1.5rem);
 	transition: all ease 0.4s;
 	border-radius: 1rem;
@@ -322,6 +351,8 @@ body {
 	box-shadow: 1px 3px 30px 3px #d3c081;
 }
 .card3 {
+	cursor: pointer;
+
 	transform: rotate(15deg);
 	transition: all ease 0.4s;
 	border-radius: 1rem;
@@ -356,6 +387,15 @@ body {
 	right: 0;
 	bottom: 0;
 }
+.round-message {
+	transition: all ease 3s;
+	position: absolute;
+	top: -2rem;
+	width: 100%;
+	text-align: center;
+	animation: hovering ease infinite 3s;
+}
+
 .btn-round {
 	font-family: 'Yatra One', cursive;
 	font-size: 1.6rem;
@@ -379,6 +419,19 @@ body {
 	position: absolute;
 	top: 30%;
 }
+.card-empty {
+	position: relative;
+	margin: 0 auto;
+	border: 3px solid var(--main-red);
+	border-radius: 1rem;
+	width: 90%;
+	height: 100%;
+	background-color: var(--border-btn);
+	background: var(--card-backside);
+}
+.display-none {
+	display: none;
+}
 
 /*   animations   */
 
@@ -389,5 +442,19 @@ body {
 
 	100% {
 		color: var(--main-red);
+	}
+}
+@keyframes hovering {
+	0% {
+		transform: scale(1);
+		color: black;
+	}
+	50% {
+		transform: scale(1.1);
+		color: var(--border-btn);
+	}
+	100% {
+		transform: scale(1);
+		color: black;
 	}
 }

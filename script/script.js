@@ -2,7 +2,9 @@ console.log('Initial stage');
 
 //////// creating necessary elements
 
+//stage I elements
 const title = document.createElement('h1');
+title.classList.add('game-title');
 title.innerHTML = `
 Welcome To <span class="rock">Rock</span>
 <span class="paper">Paper</span>
@@ -13,59 +15,168 @@ Welcome To <span class="rock">Rock</span>
 const main = document.createElement('div');
 main.classList.add('main');
 main.innerHTML = `
-<div class="message-box">
-				<p>
-					You are serving a life sentence in prison for the crimes you
-					did not commit.
-				</p>
-				<p>
-					One day you are approached by a suspicious man, who offers
-					you to play a game of rock paper scissors.
-				</p>
-				<p>
-					If you <span class="green-text">win</span> - you will walk
-					as a free man
-				</p>
-				<p>
-					If you <span class="red-text">loose</span> - you will die...
-				</p>
-			</div>
-			<div class="button-container">
-				<button class="btn-start">START GAME</button>
-				<span class="decoration right-t"></span>
-				<span class="decoration right-b"></span>
-				<span class="decoration left-t"></span>
-				<span class="decoration left-b"></span>
-			</div>
-			<div class="img-container">
-				<img src="./assets/paper.svg" />
-			</div>
+	<div class="message-box">
+		<p>
+			You are serving a life sentence in prison for the crimes you
+			did not commit.
+		</p>
+		<p>
+			One day you are approached by a suspicious man, who offers
+			you to play a game of rock paper scissors.
+		</p>
+		<p>
+			If you <span class="green-text">win</span> - you will walk
+			as a free man
+		</p>
+		<p>
+			If you <span class="red-text">loose</span> - you will die...
+		</p>
+	</div>
+	<div class="button-container">
+		<button class="btn-start">START GAME</button>
+		<span class="decoration right-t"></span>
+		<span class="decoration right-b"></span>
+		<span class="decoration left-t"></span>
+		<span class="decoration left-b"></span>
+	</div>
+	<div class="img-container">
+		<img src="./assets/paper.svg" />
+	</div>
 `;
-/////// adding elements to the page
+
+//stage II elements
+const cardPaperMarkup = document.createElement('div');
+cardPaperMarkup.classList.add('card');
+cardPaperMarkup.innerHTML = `
+	<div class="card-paper"></div>
+	<h3 class="title-paper">Paper</h3>
+`;
+const cardRockMarkup = document.createElement('div');
+cardRockMarkup.classList.add('card');
+cardRockMarkup.innerHTML = `
+	<div class="card-rock"></div>
+	<h3 class="title-rock">Rock</h3>
+`;
+const cardScissorsMarkup = document.createElement('div');
+cardScissorsMarkup.classList.add('card');
+cardScissorsMarkup.innerHTML = `
+	<div class="card-scissors"></div>
+	<h3 class="title-scissors">Scissors</h3>
+`;
+const cardEmptyMarkup = document.createElement('div');
+cardEmptyMarkup.classList.add('card');
+cardEmptyMarkup.innerHTML = `
+	<div class="card-empty"></div>
+`;
+const playerLivesMarkup = document.createElement('div');
+playerLivesMarkup.classList.add('player-life--container', 'display-none');
+playerLivesMarkup.innerHTML = `
+	<h2>Your lives:</h2>
+	<div class="player-life">
+		<div class="life-circle life1">
+			<img src="./assets/skull2.svg" />
+		</div>
+		<div class="life-circle life2">
+			<img src="./assets/rose.svg" />
+		</div>
+		<div class="life-circle life3">
+			<img src="./assets/bird.svg" />
+		</div>
+	</div>				
+`;
+const suspiciousManMarkup = document.createElement('div');
+suspiciousManMarkup.classList.add('suspicious-man', 'display-none');
+suspiciousManMarkup.innerHTML = `
+	<h2>Suspicious Man</h2>
+	<div class="img-container">
+		<img src="./assets/suspiciousman.jpg" />
+	</div>
+`;
+const suspiciousCardMarkup = document.createElement('div');
+suspiciousCardMarkup.classList.add(
+	'suspicious-card--container',
+	'display-none'
+);
+suspiciousCardMarkup.appendChild(cardEmptyMarkup.cloneNode(true));
+const playerSelectedMarkup = document.createElement('div');
+playerSelectedMarkup.classList.add('player-selected', 'display-none');
+playerSelectedMarkup.appendChild(cardEmptyMarkup.cloneNode(true));
+const playerCardsMarkup = document.createElement('div');
+playerCardsMarkup.classList.add('player-cards', 'display-none');
+playerCardsMarkup.innerHTML = `
+	<div class="card1">
+		<div class="card">
+			<div class="card-rock"></div>
+			<h3 class="title-rock">Rock</h3>
+		</div>
+	</div>
+	<div class="card2">
+		<div class="card">
+			<div class="card-paper"></div>
+			<h3 class="title-paper">Paper</h3>
+		</div>
+	</div>
+	<div class="card3">
+		<div class="card">
+			<div class="card-scissors"></div>
+			<h3 class="title-scissors">Scissors</h3>
+		</div>
+	</div>
+`;
+const btnRoundMarkup = document.createElement('div');
+btnRoundMarkup.classList.add('btn-round--container', 'display-none');
+btnRoundMarkup.innerHTML = `
+<div class='round-message'>test</div>
+<button class="btn-round">Start Round</button>
+`;
+const timerMarkup = document.createElement('div');
+timerMarkup.classList.add('timer-container', 'display-none');
+timerMarkup.innerHTML = `<h1>3</h1>`;
+const playerNameMarkup = document.createElement('h2');
+playerNameMarkup.classList.add('player', 'display-none');
+playerNameMarkup.innerHTML = `You`;
+
+/////// adding stage I elements to the page
 
 document.body.appendChild(title);
 document.body.appendChild(main);
 
-///// variables
-
-//initial stage variables
+// selecting stage I variables
+const gameTitle = document.querySelector('.game-title');
 const startBtn = document.querySelector('.btn-start');
 const mainDiv = document.querySelector('.main');
 const btnContainer = document.querySelector('.button-container');
 const messageBox = document.querySelector('.message-box');
 
-//main stage variables
+////// adding stage II elements to the page;
+mainDiv.appendChild(playerLivesMarkup);
+mainDiv.appendChild(suspiciousManMarkup);
+mainDiv.appendChild(suspiciousCardMarkup);
+mainDiv.appendChild(playerSelectedMarkup);
+mainDiv.appendChild(playerCardsMarkup);
+mainDiv.appendChild(btnRoundMarkup);
+mainDiv.appendChild(timerMarkup);
+document.body.append(playerNameMarkup);
+
+// selecting stage II variables
 const suspiciousCardContainer = document.querySelector(
 	'.suspicious-card--container'
 );
 const timerContainer = document.querySelector('.timer-container');
-// const playerLivesContainer = document.querySelector('.player-life--container');
+const playerLivesContainer = document.querySelector('.player-life--container');
 const playerLife1 = document.querySelector('.life1');
 const playerLife2 = document.querySelector('.life2');
 const playerLife3 = document.querySelector('.life3');
 const playerSelectedCardContainer = document.querySelector('.player-selected');
 const roundBtn = document.querySelector('.btn-round');
 const playerCardsContainer = document.querySelector('.player-cards');
+const roundMessage = document.querySelector('.round-message');
+
+////////// main variables
+
+let timer;
+let selectedCard;
+
 /////funcions
 
 //helper functions
@@ -77,26 +188,76 @@ const wait = (timeInSec, func) => {
 		func();
 	}, time);
 };
+const changeRoundMessage = (message) => {
+	roundMessage.innerText = message;
+};
+const changeSelctedCard = (card) => {
+	playerSelectedCardContainer.innerHTML = '';
+	playerSelectedCardContainer.appendChild(card);
+};
 
 ///main functions
 
 // function that transitions the game to stage 2
 const stage2Transition = () => {
+	// hiding stage I elements
+	gameTitle.style.display = 'none';
 	messageBox.innerHTML = '';
 	messageBox.style.display = 'none';
 	btnContainer.style.display = 'none';
 	mainDiv.style.backgroundImage = 'url(../assets/outcell.jpg)';
+
+	// revealing stage II elements
+	playerLivesMarkup.classList.remove('display-none');
+	suspiciousManMarkup.classList.remove('display-none');
+	suspiciousCardMarkup.classList.remove('display-none');
+	playerSelectedMarkup.classList.remove('display-none');
+	playerCardsMarkup.classList.remove('display-none');
+	btnRoundMarkup.classList.remove('display-none');
+	timerMarkup.classList.remove('display-none');
+	playerNameMarkup.classList.remove('display-none');
+
 	mainDiv.style.opacity = 1; // fadeIn animation
+
+	// adding message pick a card
+	changeRoundMessage('Pick A Card');
+	mainGame();
 };
 
+// main game logic
+const mainGame = () => {
+	console.log('Main stage');
+	// adding event listener for player cards
+	playerCardsContainer.addEventListener('click', (e) => {
+		if (e.target.classList.contains('card1')) {
+			changeSelctedCard(cardRockMarkup.cloneNode(true));
+			changeRoundMessage('Press Start');
+			selectedCard = 'rock';
+			console.log(selectedCard);
+		}
+		if (e.target.classList.contains('card2')) {
+			changeSelctedCard(cardPaperMarkup.cloneNode(true));
+			changeRoundMessage('Press Start');
+			selectedCard = 'paper';
+			console.log(selectedCard);
+		}
+		if (e.target.classList.contains('card3')) {
+			changeSelctedCard(cardScissorsMarkup.cloneNode(true));
+			changeRoundMessage('Press Start');
+			selectedCard = 'scissors';
+			console.log(selectedCard);
+		}
+
+		roundBtn.addEventListener('click', (e) => {
+			console.log('start round');
+		});
+	});
+};
 // events logic
 
 startBtn.addEventListener('click', (e) => {
 	console.log('Transitioning to main stage');
 	mainDiv.style.opacity = 0; // fadeOut animation
+	gameTitle.style.opacity = 0;
 	wait(2, stage2Transition);
-});
-
-roundBtn.addEventListener('click', (e) => {
-	console.log('start round');
 });
