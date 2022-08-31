@@ -53,7 +53,7 @@ body {
 
 .main {
 	position: relative;
-	padding: 0.2rem 1rem;
+	padding: 0 0;
 	width: 100vw;
 	max-width: 1100px;
 	height: 85vh;
@@ -62,7 +62,6 @@ body {
 	justify-content: flex-start;
 	flex-direction: column;
 	background-image: url('../assets/jailcell.jpg');
-	/* background-image: url('../assets/outcell.jpg'); */
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -70,16 +69,17 @@ body {
 }
 
 .message-box {
+	margin-top: 1rem;
 	border: 5px double #5d5650;
 	border-radius: 5%;
 	font-size: 1.3rem;
 	padding: 0.5rem 1rem;
 	width: 60vw;
-	max-width: 1100px;
+	max-width: 800px;
 }
 
 .button-container {
-	margin-top: 20%;
+	margin-top: 15%;
 	position: relative;
 	padding: 3rem;
 }
@@ -201,11 +201,11 @@ body {
 	height: 3.5rem;
 	border: 2px solid var(--main-red);
 	border-radius: 50%;
-	background-color: #bca572;
+	background-color: #bca472b0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.2rem;
+	padding: 0.3rem;
 }
 .life-circle > img {
 	height: 100%;
@@ -307,7 +307,7 @@ body {
 	width: 10rem;
 	height: 15rem;
 	position: absolute;
-	right: 10%;
+	right: 5%;
 	top: 25%;
 }
 .player-selected::after {
@@ -363,8 +363,6 @@ body {
 	box-shadow: 1px 3px 30px 3px #d3c081;
 }
 
-/* player styles */
-
 /* general styles */
 .red-text {
 	color: var(--main-red-lighter);
@@ -418,6 +416,11 @@ body {
 	font-size: 2rem;
 	position: absolute;
 	top: 30%;
+	max-width: 22rem;
+}
+.timer-container > h1 {
+	color: var(--main-red-lighter);
+	color: white;
 }
 .card-empty {
 	position: relative;
@@ -429,8 +432,21 @@ body {
 	background-color: var(--border-btn);
 	background: var(--card-backside);
 }
+.player {
+	transition: opacity ease 2s;
+}
 .display-none {
 	display: none;
+}
+.pointer-none {
+	pointer-events: none;
+}
+.final-message {
+	width: 100%;
+	text-align: center;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.669);
 }
 
 /*   animations   */
